@@ -51,8 +51,15 @@ app.post('/login', async (req, res) => {
         }
 
         // If login successful, return success response
-        console.log("Login successful");
-        return res.status(200).json({ message: 'Login successful', user: { username: user.username, level: user.level, experience: user.experience } });
+        let userData = {
+            username: user.username,
+            level: user.level,
+            experience: user.experience,
+            hp: user.hp,
+            mana: user.mana,
+            gold: user.gold,
+        }
+        return res.status(200).json({ message: 'Login successful', user: userData });
     } catch (err) {
         console.error(err);
         return res.status(500).json({ error: 'Internal server error' });
