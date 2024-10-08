@@ -2,6 +2,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const authRoutes = require('./routes/auth');
+const playerSkillsRoutes = require('./routes/playerSkills');
 
 // Load environment variables from .env file
 dotenv.config();
@@ -18,7 +19,10 @@ app.get('/ping', (req, res) => {
 });
 
 // Use auth routes
-app.use('/api', authRoutes);
+app.use('/api/auth', authRoutes);
+
+// Use player skills routes
+app.use('/api/skill', playerSkillsRoutes);
 
 // Start the server
 app.listen(port, '0.0.0.0', () => {
