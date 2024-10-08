@@ -52,4 +52,40 @@ router.post('/register', async (req, res) => {
     }
 });
 
+// Login API endpoint
+router.post('/login', async (req, res) => {
+    const { usernameOrEmail, password } = req.body;
+
+    try {
+        // Check if user exists (by username or email)
+        const userQuery = await pool.query('SELECT * FROM users WHERE username = $1 OR email = $2', [usernameOrEmail, usernameOrEmail]);
+
+        if (userQuery.rows.length === 0) {
+            return res.status(400).json({ message: 'Invalid username or password' });
+        }
+
+        const user = userQuery.rows[0];
+
+        // Compare the password with the hashed password in the database
+        const isMatch = await bcrypt.compare(password, user.hash_password);
+
+        if (!isMatch) {
+            return res.status(400).json({ message: 'Invalid username or password' });
+        }
+
+        // If login is successful, return user details (excluding password)
+        return res.status(200).json({
+            message: 'Login successful',
+            user: {
+                user_id: user.user_id,
+                username: user.username,
+                email: user.email,
+            },
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
 module.exports = router;
