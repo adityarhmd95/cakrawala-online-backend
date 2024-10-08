@@ -31,14 +31,11 @@ router.post('/register', async (req, res) => {
             [newUser.rows[0].user_id]
         );
 
-        // Insert default skills for the new player
-        const skills = ['Chopping', 'Mining', 'Gathering', 'Sword', 'Dagger', 'Axe', 'Hammer', 'Club', 'Heavy Armor', 'Medium Armor', 'Light Armor', 'Repairing', 'Healing', 'Assassin'];
-        for (const skill of skills) {
-            await pool.query(
-                'INSERT INTO player_skills (player_id, skill_id, exp, level) VALUES ($1, (SELECT skill_id FROM skills WHERE name = $2), $3, $4)',
-                [newPlayer.rows[0].player_id, skill, 0, 1]
-            );
-        }
+        // Initialize player skills with default values
+        await pool.query(
+            'INSERT INTO player_skills (player_id) VALUES ($1)',
+            [newPlayer.rows[0].player_id]
+        );
 
         return res.status(201).json({
             message: 'User registered successfully',
