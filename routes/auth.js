@@ -55,8 +55,6 @@ router.post('/register', async (req, res) => {
 // Login API endpoint
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;
-    console.log("Start logging")
-    console.log(req.body);
 
     try {
         // Check if user exists (by username or email)
