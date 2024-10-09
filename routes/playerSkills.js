@@ -84,9 +84,6 @@ router.post('/', async (req, res) => {
           index++;
       }
 
-      console.log("DISINI QUERY")
-      console.log(updateQueries)
-
       // Execute all updates separately
       for (const [i, query] of updateQueries.entries()) {
           const skill = Object.keys(skills)[i];
