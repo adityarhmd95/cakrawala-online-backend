@@ -39,7 +39,7 @@ router.post('/register', async (req, res) => {
 
         return res.status(201).json({
             message: 'User registered successfully',
-            user: {
+            data: {
                 user_id: newUser.rows[0].user_id,
                 username: newUser.rows[0].username,
                 email: newUser.rows[0].email,
@@ -76,7 +76,7 @@ router.post('/login', async (req, res) => {
         // If login is successful, return user details (excluding password)
         return res.status(200).json({
             message: 'Login successful',
-            user: {
+            data: {
                 user_id: user.user_id,
                 username: user.username,
                 email: user.email,

@@ -31,7 +31,7 @@ router.get('/:playerId', async (req, res) => {
     // Return player skills
     return res.status(200).json({
       message: 'Player skills retrieved successfully',
-      skills: result.rows[0] // Return the first row since player_id is the primary key
+      data: result.rows[0] // Return the first row since player_id is the primary key
     });
   } catch (error) {
     console.error(error);

@@ -25,7 +25,7 @@ router.get('/:playerId', async (req, res) => {
         // Return player details
         return res.status(200).json({
             message: 'Player details retrieved successfully',
-            player: result.rows[0] // Return the first row since player_id is the primary key
+            data: result.rows[0] // Return the first row since player_id is the primary key
         });
     } catch (error) {
         console.error(error);
