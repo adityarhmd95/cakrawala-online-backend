@@ -61,7 +61,7 @@ router.post('/login', async (req, res) => {
 
     try {
         // Check if user exists (by username or email)
-        const userQuery = await pool.query('SELECT * FROM users WHERE username = $1 OR email = $2', [usernameOrEmail, usernameOrEmail]);
+        const userQuery = await pool.query('SELECT * FROM users WHERE username = $1 OR email = $2', [username, username]);
 
         if (userQuery.rows.length === 0) {
             return res.status(400).json({ message: 'Invalid username or password' });
