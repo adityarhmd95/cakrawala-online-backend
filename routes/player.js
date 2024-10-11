@@ -7,6 +7,7 @@ const router = express.Router();
 // Get player details API endpoint
 router.get('/:playerId', async (req, res) => {
     const { playerId } = req.params;
+    const client_id = req.headers['client_id'];
 
     try {
         // Validate input
@@ -25,6 +26,7 @@ router.get('/:playerId', async (req, res) => {
         // Return player details
         return res.status(200).json({
             message: 'Player details retrieved successfully',
+            client_id: client_id,
             data: result.rows[0] // Return the first row since player_id is the primary key
         });
     } catch (error) {
@@ -37,6 +39,7 @@ router.get('/:playerId', async (req, res) => {
 router.put('/:playerId', async (req, res) => {
   const { playerId } = req.params;
   const { hp, mp, atk, def, crit_chance, move_speed, atk_speed } = req.body;
+  const client_id = req.headers['client_id'];
 
   try {
       // Validate input
@@ -93,6 +96,7 @@ router.put('/:playerId', async (req, res) => {
       // Return success response
       return res.status(200).json({
           message: 'Player updated successfully',
+          client_id: client_id,
       });
   } catch (error) {
       console.error(error);

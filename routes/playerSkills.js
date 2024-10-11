@@ -9,6 +9,7 @@ router.get('/:playerId', async (req, res) => {
   const {
     playerId
   } = req.params;
+  const client_id = req.headers['client_id'];
 
   try {
     // Validate input
@@ -31,6 +32,7 @@ router.get('/:playerId', async (req, res) => {
     // Return player skills
     return res.status(200).json({
       message: 'Player skills retrieved successfully',
+      client_id: client_id,
       data: result.rows[0] // Return the first row since player_id is the primary key
     });
   } catch (error) {
@@ -45,6 +47,7 @@ router.get('/:playerId', async (req, res) => {
 // Update all player skills API endpoint
 router.post('/', async (req, res) => {
   const { playerId, skills } = req.body;
+  const client_id = req.headers['client_id'];
 
   try {
       // Validate input
@@ -94,6 +97,7 @@ router.post('/', async (req, res) => {
       // Return success response
       return res.status(200).json({
           message: 'Player skills updated successfully',
+          client_id: client_id,
       });
   } catch (error) {
       console.error(error);

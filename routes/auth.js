@@ -8,6 +8,7 @@ const router = express.Router();
 // Register API endpoint
 router.post('/register', async (req, res) => {
     const { username, email, password } = req.body;
+    const client_id = req.headers['client_id'];
 
     try {
         // Check if username or email already exists
@@ -39,6 +40,7 @@ router.post('/register', async (req, res) => {
 
         return res.status(201).json({
             message: 'User registered successfully',
+            client_id: client_id,
             data: {
                 user_id: newUser.rows[0].user_id,
                 username: newUser.rows[0].username,
@@ -54,7 +56,8 @@ router.post('/register', async (req, res) => {
 
 // Login API endpoint
 router.post('/login', async (req, res) => {
-    const { usernameOrEmail, password } = req.body;
+    const { username, password } = req.body;
+    const client_id = req.headers['client_id'];
 
     try {
         // Check if user exists (by username or email)
@@ -76,6 +79,7 @@ router.post('/login', async (req, res) => {
         // If login is successful, return user details (excluding password)
         return res.status(200).json({
             message: 'Login successful',
+            client_id: client_id,
             data: {
                 user_id: user.user_id,
                 username: user.username,
