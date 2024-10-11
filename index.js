@@ -3,6 +3,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const authRoutes = require('./routes/auth');
 const playerSkillsRoutes = require('./routes/playerSkills');
+const playerRoutes = require('./routes/player');  // Tambahkan ini
 
 // Load environment variables from .env file
 dotenv.config();
@@ -23,6 +24,9 @@ app.use('/api/auth', authRoutes);
 
 // Use player skills routes
 app.use('/api/skill', playerSkillsRoutes);
+
+// Use player details routes
+app.use('/api/player', playerRoutes);  // Tambahkan ini
 
 // Start the server
 app.listen(port, '0.0.0.0', () => {
