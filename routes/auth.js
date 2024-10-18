@@ -53,7 +53,6 @@ router.post('/register', async (req, res) => {
         ];
 
         for (const item of defaultWardrobe) {
-            console.log(item.skin_type, " - ", item.skin_id)
             await pool.query(
                 'INSERT INTO wardrobe (player_id, skin_type, skin_id) VALUES ($1, $2, $3)',
                 [newPlayer.rows[0].player_id, item.skin_type, item.skin_id]

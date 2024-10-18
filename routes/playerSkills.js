@@ -45,9 +45,8 @@ router.get('/:playerId', async (req, res) => {
 
 
 router.put('/:playerId', async (req, res) => {
-  const {
-    playerId
-  } = req.params;
+  const { playerId } = req.params;
+  const client_id = req.headers['client_id'];
   const {
     chopping_lv,
     chopping_exp,
@@ -156,6 +155,7 @@ router.put('/:playerId', async (req, res) => {
     // Return success response
     return res.status(200).json({
       message: 'Player skills updated successfully',
+      client_id: client_id,
     });
   } catch (error) {
     console.error(error);
