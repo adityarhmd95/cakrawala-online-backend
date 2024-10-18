@@ -6,9 +6,7 @@ const router = express.Router();
 
 // Get player details API endpoint
 router.get('/:playerId', async (req, res) => {
-    const {
-        playerId
-    } = req.params;
+    const { playerId } = req.params;
     const client_id = req.headers['client_id'];
 
     try {
@@ -47,9 +45,7 @@ router.get('/:playerId', async (req, res) => {
 
 // Update player API endpoint
 router.put('/:playerId', async (req, res) => {
-    const {
-        playerId
-    } = req.params;
+    const { playerId } = req.params;
     const client_id = req.headers['client_id'];
     const {
         hp,

@@ -38,9 +38,16 @@ router.post('/register', async (req, res) => {
             [newPlayer.rows[0].player_id]
         );
 
+        // Initialize default inventory with the structure
+        await pool.query(
+            'INSERT INTO player_inventory (player_id) VALUES ($1)',
+            [newPlayer.rows[0].player_id]
+        );
+
         // Initialize default wardrobe (for example, default body, hair, and outfit)
         const defaultWardrobe = [
             { skin_type: 'body', skin_id: 'body_01' },
+            { skin_type: 'body', skin_id: 'body_02' },
             { skin_type: 'hair', skin_id: 'hair_01' },
             { skin_type: 'outfit', skin_id: 'outfit_01' }
         ];
