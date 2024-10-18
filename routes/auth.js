@@ -38,6 +38,20 @@ router.post('/register', async (req, res) => {
             [newPlayer.rows[0].player_id]
         );
 
+        // Initialize default wardrobe (for example, default body, hair, and outfit)
+        const defaultWardrobe = [
+            { skin_type: 'body', skin_id: 'body_01' },
+            { skin_type: 'hair', skin_id: 'hair_01' },
+            { skin_type: 'outfit', skin_id: 'outfit_01' }
+        ];
+
+        for (const item of defaultWardrobe) {
+            await pool.query(
+                'INSERT INTO wardrobe (player_id, skin_type, skin_id) VALUES ($1, $2, $3)',
+                [newPlayer.rows[0].player_id, item.skin_type, item.skin_id]
+            );
+        }
+
         return res.status(201).json({
             message: 'User registered successfully',
             client_id: client_id,
@@ -60,8 +74,11 @@ router.post('/login', async (req, res) => {
     const client_id = req.headers['client_id'];
 
     try {
-        // Check if user exists (by username or email)
-        const userQuery = await pool.query('SELECT * FROM users WHERE username = $1 OR email = $2', [username, username]);
+        // Check if user exists by username, ignoring case sensitivity
+        const userQuery = await pool.query(`
+            SELECT * FROM users 
+            WHERE LOWER(username) = LOWER($1)
+        `, [username]);
 
         if (userQuery.rows.length === 0) {
             return res.status(400).json({ message: 'Invalid username or password' });
