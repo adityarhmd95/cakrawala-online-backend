@@ -49,7 +49,9 @@ router.post('/register', async (req, res) => {
             { skin_type: 'body', skin_id: 'body_01' },
             { skin_type: 'body', skin_id: 'body_02' },
             { skin_type: 'hair', skin_id: 'hair_01' },
-            { skin_type: 'outfit', skin_id: 'outfit_01' }
+            { skin_type: 'hair', skin_id: 'hair_02' },
+            { skin_type: 'outfit', skin_id: 'outfit_01' },
+            { skin_type: 'outfit', skin_id: 'outfit_02' }
         ];
 
         for (const item of defaultWardrobe) {
