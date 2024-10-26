@@ -156,6 +156,7 @@ router.put('/:playerId', async (req, res) => {
     return res.status(200).json({
       message: 'Player skills updated successfully',
       client_id: client_id,
+      player_id: result.rows[0].player_id,
     });
   } catch (error) {
     console.error(error);

@@ -52,6 +52,7 @@ router.get('/:playerId', async (req, res) => {
         return res.status(200).json({
             message: 'Wardrobe retrieved successfully',
             client_id: client_id,
+            player_id: result.rows[0].player_id,
             wardrobe: wardrobe
         });
     } catch (error) {
