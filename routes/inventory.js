@@ -21,10 +21,12 @@ router.get('/:playerId', async (req, res) => {
             return res.status(404).json({ message: 'Inventory not found for this player' });
         }
 
+        console.log("UPDATING")
+
         // Return the player's inventory
         return res.status(200).json({
             message: 'Inventory retrieved successfully',
-            client_id: client_id,
+            // client_id: client_id,
             player_id: result.rows[0].player_id,
             inventory: result.rows[0].inventory
         });
