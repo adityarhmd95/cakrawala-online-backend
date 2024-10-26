@@ -25,6 +25,7 @@ router.get('/:playerId', async (req, res) => {
         return res.status(200).json({
             message: 'Inventory retrieved successfully',
             client_id: client_id,
+            player_id: result.rows[0].player_id,
             inventory: result.rows[0].inventory
         });
     } catch (error) {
@@ -57,13 +58,10 @@ router.put('/:playerId', async (req, res) => {
             return res.status(404).json({ message: 'Player not found or inventory could not be updated' });
         }
 
-        console.log(result.rows[0].player_id);
-
         // Return success response
         return res.status(200).json({
             message: 'Inventory updated successfully',
             client_id: client_id,
-            player_id: result.rows[0].player_id,
             inventory: result.rows[0].inventory
         });
     } catch (error) {

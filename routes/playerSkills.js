@@ -33,6 +33,7 @@ router.get('/:playerId', async (req, res) => {
     return res.status(200).json({
       message: 'Player skills retrieved successfully',
       client_id: client_id,
+      player_id: result.rows[0].player_id,
       data: result.rows[0] // Return the first row since player_id is the primary key
     });
   } catch (error) {
@@ -156,7 +157,6 @@ router.put('/:playerId', async (req, res) => {
     return res.status(200).json({
       message: 'Player skills updated successfully',
       client_id: client_id,
-      player_id: result.rows[0].player_id,
     });
   } catch (error) {
     console.error(error);
