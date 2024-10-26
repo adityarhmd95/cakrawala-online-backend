@@ -53,7 +53,7 @@ router.get('/:playerId', async (req, res) => {
             message: 'Wardrobe retrieved successfully',
             client_id: client_id,
             player_id: playerId,
-            wardrobe: wardrobe
+            data: wardrobe
         });
     } catch (error) {
         console.error(error);

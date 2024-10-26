@@ -26,7 +26,7 @@ router.get('/:playerId', async (req, res) => {
             message: 'Inventory retrieved successfully',
             client_id: client_id,
             player_id: playerId,
-            inventory: result.rows[0].inventory
+            data: result.rows[0].inventory
         });
     } catch (error) {
         console.error(error);
