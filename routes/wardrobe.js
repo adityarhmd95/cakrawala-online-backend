@@ -48,13 +48,11 @@ router.get('/:playerId', async (req, res) => {
             }
         });
 
-        console.log("add ID")
-
         // Return the grouped wardrobe items
         return res.status(200).json({
             message: 'Wardrobe retrieved successfully',
             client_id: client_id,
-            player_id: result.rows[0].player_id,
+            player_id: playerId,
             wardrobe: wardrobe
         });
     } catch (error) {
