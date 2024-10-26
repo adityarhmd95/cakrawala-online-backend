@@ -100,12 +100,25 @@ router.post('/login', async (req, res) => {
             return res.status(400).json({ message: 'Invalid username or password' });
         }
 
+        // Get the player's player_id associated with this user
+        const playerQuery = await pool.query(
+            'SELECT player_id FROM players WHERE user_id = $1',
+            [user.user_id]
+        );
+
+        if (playerQuery.rows.length === 0) {
+            return res.status(404).json({ message: 'Player data not found for this user' });
+        }
+
+        const player_id = playerQuery.rows[0].player_id;
+
         // If login is successful, return user details (excluding password)
         return res.status(200).json({
             message: 'Login successful',
             client_id: client_id,
             data: {
                 user_id: user.user_id,
+                player_id: player_id,
                 username: user.username,
                 email: user.email,
             },
