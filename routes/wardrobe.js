@@ -24,27 +24,21 @@ router.get('/:playerId', async (req, res) => {
             });
         }
 
-        // Initialize response structure with empty objects for each skin type
+        // Initialize response structure with empty arrays for each skin type
         const wardrobe = {
-            player_hair: {},
-            player_body: {},
-            player_outfit: {}
+            player_hair: [],
+            player_body: [],
+            player_outfit: []
         };
 
         // Group the wardrobe items by skin_type
         result.rows.forEach(item => {
             if (item.skin_type === 'hair') {
-                wardrobe.player_hair = {
-                    skin_id: item.skin_id
-                };
+                wardrobe.player_hair.push({ skin_id: item.skin_id });
             } else if (item.skin_type === 'body') {
-                wardrobe.player_body = {
-                    skin_id: item.skin_id
-                };
+                wardrobe.player_body.push({ skin_id: item.skin_id });
             } else if (item.skin_type === 'outfit') {
-                wardrobe.player_outfit = {
-                    skin_id: item.skin_id
-                };
+                wardrobe.player_outfit.push({ skin_id: item.skin_id });
             }
         });
 
