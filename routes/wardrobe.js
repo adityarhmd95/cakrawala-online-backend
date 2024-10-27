@@ -26,9 +26,9 @@ router.get('/:playerId', async (req, res) => {
 
         // Initialize response structure with empty objects for each skin type
         const wardrobe = {
-            hair: {},
-            body: {},
-            outfit: {}
+            player_hair: {},
+            player_body: {},
+            player_outfit: {}
         };
 
         // Group the wardrobe items by skin_type
