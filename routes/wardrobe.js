@@ -34,15 +34,15 @@ router.get('/:playerId', async (req, res) => {
         // Group the wardrobe items by skin_type
         result.rows.forEach(item => {
             if (item.skin_type === 'hair') {
-                wardrobe.hair = {
+                wardrobe.player_hair = {
                     skin_id: item.skin_id
                 };
             } else if (item.skin_type === 'body') {
-                wardrobe.body = {
+                wardrobe.player_body = {
                     skin_id: item.skin_id
                 };
             } else if (item.skin_type === 'outfit') {
-                wardrobe.outfit = {
+                wardrobe.player_outfit = {
                     skin_id: item.skin_id
                 };
             }
