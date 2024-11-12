@@ -5,15 +5,6 @@ const pool = require('../db/database');
 
 const router = express.Router();
 
-
-router.get('/hello', async (req, res) => {
-
-    console.log("Endpoint /api/auth/hello hit");
-
-    return res.status(200).json({ message: "Hello World" });
-});
-
-
 // Register API endpoint
 router.post('/register', async (req, res) => {
     const { username, email, password } = req.body;
