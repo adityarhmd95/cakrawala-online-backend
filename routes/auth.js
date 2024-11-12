@@ -7,7 +7,7 @@ const router = express.Router();
 
 
 router.post('/hello', async (req, res) => {
-    return "Hello World"
+    return res.status(200).json({ message: "Hello World" });
 });
 
 
