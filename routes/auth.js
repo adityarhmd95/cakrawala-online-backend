@@ -6,7 +6,7 @@ const pool = require('../db/database');
 const router = express.Router();
 
 
-router.post('/hello', async (req, res) => {
+router.get('/hello', async (req, res) => {
 
     console.log("Endpoint /api/auth/hello hit");
 
@@ -18,7 +18,7 @@ router.post('/hello', async (req, res) => {
 router.post('/register', async (req, res) => {
     const { username, email, password } = req.body;
     const client_id = req.headers['client_id'];
-    
+
     try {
         // Check if username or email already exists
         const existingUser = await pool.query('SELECT * FROM users WHERE username = $1 OR email = $2', [username, email]);
