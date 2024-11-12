@@ -10,6 +10,8 @@ router.post('/register', async (req, res) => {
     const { username, email, password } = req.body;
     const client_id = req.headers['client_id'];
 
+    console.log("ini jalan")
+
     try {
         // Check if username or email already exists
         const existingUser = await pool.query('SELECT * FROM users WHERE username = $1 OR email = $2', [username, email]);
