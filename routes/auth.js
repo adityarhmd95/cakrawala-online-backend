@@ -7,6 +7,9 @@ const router = express.Router();
 
 
 router.post('/hello', async (req, res) => {
+
+    console.log("Endpoint /api/auth/hello hit");
+
     return res.status(200).json({ message: "Hello World" });
 });
 
@@ -15,9 +18,7 @@ router.post('/hello', async (req, res) => {
 router.post('/register', async (req, res) => {
     const { username, email, password } = req.body;
     const client_id = req.headers['client_id'];
-
-    console.log("ini jalan")
-
+    
     try {
         // Check if username or email already exists
         const existingUser = await pool.query('SELECT * FROM users WHERE username = $1 OR email = $2', [username, email]);
