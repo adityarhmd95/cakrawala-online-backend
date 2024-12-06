@@ -57,6 +57,7 @@ router.put('/:playerId', async (req, res) => {
         level,
         current_exp,
         total_exp,
+        weapon_type,
         main_weapon_id,
         second_weapon_id,
         helmet_id,
@@ -124,6 +125,10 @@ router.put('/:playerId', async (req, res) => {
         if (main_weapon_id !== undefined) {
             fields.push(`main_weapon_id = $${index++}`);
             values.push(main_weapon_id);
+        }
+        if (weapon_type !== undefined) {
+            fields.push(`weapon_type = $${index++}`);
+            values.push(weapon_type);
         }
         if (second_weapon_id !== undefined) {
             fields.push(`second_weapon_id = $${index++}`);
