@@ -62,7 +62,7 @@ router.put('/:playerId', async (req, res) => {
         second_weapon_id,
         helmet_id,
         armor_id,
-        trouser_id,
+        mount_id,
         boot_id,
         player_body,
         player_hair,
@@ -142,9 +142,9 @@ router.put('/:playerId', async (req, res) => {
             fields.push(`armor_id = $${index++}`);
             values.push(armor_id);
         }
-        if (trouser_id !== undefined) {
-            fields.push(`trouser_id = $${index++}`);
-            values.push(trouser_id);
+        if (mount_id !== undefined) {
+            fields.push(`mount_id = $${index++}`);
+            values.push(mount_id);
         }
         if (boot_id !== undefined) {
             fields.push(`boot_id = $${index++}`);
