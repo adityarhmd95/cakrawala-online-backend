@@ -39,7 +39,7 @@ router.get('/:playerId', async (req, res) => {
 router.put('/:playerId', async (req, res) => {
     const { playerId } = req.params;
     const client_id = req.headers['client_id'];
-    const { inventory } = req.body;
+    const inventory = req.body;
 
     try {
         // Validate input
