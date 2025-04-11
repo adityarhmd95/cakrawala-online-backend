@@ -70,7 +70,9 @@ router.put('/:playerId', async (req, res) => {
         weight,
         last_map,
         pos_x,
-        pos_y
+        pos_y,
+        ring_id,        // Added these fields
+        necklace_id     // Added these fields
     } = req.body;
 
     try {
@@ -86,98 +88,31 @@ router.put('/:playerId', async (req, res) => {
         const values = [];
         let index = 1;
 
-        if (hp !== undefined) {
-            fields.push(`hp = $${index++}`);
-            values.push(hp);
-        }
-        if (mp !== undefined) {
-            fields.push(`mp = $${index++}`);
-            values.push(mp);
-        }
-        if (atk !== undefined) {
-            fields.push(`atk = $${index++}`);
-            values.push(atk);
-        }
-        if (def !== undefined) {
-            fields.push(`def = $${index++}`);
-            values.push(def);
-        }
-        if (crit_chance !== undefined) {
-            fields.push(`crit_chance = $${index++}`);
-            values.push(crit_chance);
-        }
-        if (move_speed !== undefined) {
-            fields.push(`move_speed = $${index++}`);
-            values.push(move_speed);
-        }
-        if (level !== undefined) {
-            fields.push(`level = $${index++}`);
-            values.push(level);
-        }
-        if (current_exp !== undefined) {
-            fields.push(`current_exp = $${index++}`);
-            values.push(current_exp);
-        }
-        if (total_exp !== undefined) {
-            fields.push(`total_exp = $${index++}`);
-            values.push(total_exp);
-        }
-        if (main_weapon_id !== undefined) {
-            fields.push(`main_weapon_id = $${index++}`);
-            values.push(main_weapon_id);
-        }
-        if (weapon_type !== undefined) {
-            fields.push(`weapon_type = $${index++}`);
-            values.push(weapon_type);
-        }
-        if (second_weapon_id !== undefined) {
-            fields.push(`second_weapon_id = $${index++}`);
-            values.push(second_weapon_id);
-        }
-        if (helmet_id !== undefined) {
-            fields.push(`helmet_id = $${index++}`);
-            values.push(helmet_id);
-        }
-        if (armor_id !== undefined) {
-            fields.push(`armor_id = $${index++}`);
-            values.push(armor_id);
-        }
-        if (mount_id !== undefined) {
-            fields.push(`mount_id = $${index++}`);
-            values.push(mount_id);
-        }
-        if (boot_id !== undefined) {
-            fields.push(`boot_id = $${index++}`);
-            values.push(boot_id);
-        }
-        if (player_body !== undefined) {
-            fields.push(`player_body = $${index++}`);
-            values.push(player_body);
-        }
-        if (player_hair !== undefined) {
-            fields.push(`player_hair = $${index++}`);
-            values.push(player_hair);
-        }
-        if (player_outfit !== undefined) {
-            fields.push(`player_outfit = $${index++}`);
-            values.push(player_outfit);
-        }
-        if (weight !== undefined) {
-            fields.push(`weight = $${index++}`);
-            values.push(weight);
-        }
-        if (last_map !== undefined) {
-            fields.push(`last_map = $${index++}`);
-            values.push(last_map);
-        }
-        if (pos_x !== undefined) {
-            fields.push(`pos_x = $${index++}`);
-            values.push(pos_x);
-        }
-        if (pos_y !== undefined) {
-            fields.push(`pos_y = $${index++}`);
-            values.push(pos_y);
-        }
+        if (hp !== undefined) fields.push(`hp = $${index++}`), values.push(hp);
+        if (mp !== undefined) fields.push(`mp = $${index++}`), values.push(mp);
+        if (atk !== undefined) fields.push(`atk = $${index++}`), values.push(atk);
+        if (def !== undefined) fields.push(`def = $${index++}`), values.push(def);
+        if (crit_chance !== undefined) fields.push(`crit_chance = $${index++}`), values.push(crit_chance);
+        if (move_speed !== undefined) fields.push(`move_speed = $${index++}`), values.push(move_speed);
+        if (level !== undefined) fields.push(`level = $${index++}`), values.push(level);
+        if (current_exp !== undefined) fields.push(`current_exp = $${index++}`), values.push(current_exp);
+        if (total_exp !== undefined) fields.push(`total_exp = $${index++}`), values.push(total_exp);
+        if (main_weapon_id !== undefined) fields.push(`main_weapon_id = $${index++}`), values.push(main_weapon_id);
+        if (weapon_type !== undefined) fields.push(`weapon_type = $${index++}`), values.push(weapon_type);
+        if (second_weapon_id !== undefined) fields.push(`second_weapon_id = $${index++}`), values.push(second_weapon_id);
+        if (helmet_id !== undefined) fields.push(`helmet_id = $${index++}`), values.push(helmet_id);
+        if (armor_id !== undefined) fields.push(`armor_id = $${index++}`), values.push(armor_id);
+        if (mount_id !== undefined) fields.push(`mount_id = $${index++}`), values.push(mount_id);
+        if (boot_id !== undefined) fields.push(`boot_id = $${index++}`), values.push(boot_id);
+        if (player_body !== undefined) fields.push(`player_body = $${index++}`), values.push(player_body);
+        if (player_hair !== undefined) fields.push(`player_hair = $${index++}`), values.push(player_hair);
+        if (player_outfit !== undefined) fields.push(`player_outfit = $${index++}`), values.push(player_outfit);
+        if (weight !== undefined) fields.push(`weight = $${index++}`), values.push(weight);
+        if (last_map !== undefined) fields.push(`last_map = $${index++}`), values.push(last_map);
+        if (pos_x !== undefined) fields.push(`pos_x = $${index++}`), values.push(pos_x);
+        if (pos_y !== undefined) fields.push(`pos_y = $${index++}`), values.push(pos_y);
+        if (ring_id !== undefined) fields.push(`ring_id = $${index++}`), values.push(ring_id);
+        if (necklace_id !== undefined) fields.push(`necklace_id = $${index++}`), values.push(necklace_id);
 
         // If no fields to update
         if (fields.length === 0) {
@@ -199,9 +134,10 @@ router.put('/:playerId', async (req, res) => {
             client_id: client_id,
         });
     } catch (error) {
-        console.error(error);
+        console.error('Database error:', error);
         return res.status(500).json({
-            message: 'Internal server error'
+            message: 'Internal server error',
+            error: error.message // Include error message in response for debugging
         });
     }
 });
