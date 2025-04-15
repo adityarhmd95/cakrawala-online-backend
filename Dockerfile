@@ -1,16 +1,20 @@
-FROM node:16-alpine
+# Menggunakan image Node.js versi LTS
+FROM node:18-alpine
 
-WORKDIR /app
+# Buat direktori app
+WORKDIR /usr/src/app
 
+# Copy package.json dan package-lock.json
 COPY package*.json ./
-COPY prisma ./prisma
 
-RUN npm ci --only=production
+# Install dependencies
+RUN npm install
 
+# Copy semua file proyek
 COPY . .
 
-RUN npx prisma generate
+# Expose port yang digunakan aplikasi
+EXPOSE 8080
 
-EXPOSE 3000
-
-CMD ["npm", "start"]
+# Command untuk menjalankan aplikasi
+CMD ["node", "src/app.js"]
