@@ -1,20 +1,20 @@
-# Gunakan image node sebagai base
-FROM node:14
+# Gunakan Node versi stabil
+FROM node:18
 
-# Tentukan direktori kerja dalam container
+# Set direktori kerja
 WORKDIR /app
 
-# Salin file package.json dan package-lock.json
+# Copy dependencies
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install --production
+RUN npm install
 
-# Salin semua file dari proyek ke container
+# Copy semua file ke container
 COPY . .
 
-# Expose port aplikasi (port ini harus sama dengan yang dipakai di app.listen)
+# Expose port (disesuaikan jika kamu pakai port lain)
 EXPOSE 3000
 
 # Jalankan aplikasi
-CMD ["node", "index.js"]
+CMD ["npm", "start"]
