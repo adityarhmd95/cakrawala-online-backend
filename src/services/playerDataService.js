@@ -80,7 +80,7 @@ const playerDataService = {
   
       // Update inventory
       if (data.inventory) {
-        await Inventory.updateInventory(userId, data.inventory.items);
+        await Inventory.updateInventory(userId, data.inventory);
       }
   
       // Update skills
