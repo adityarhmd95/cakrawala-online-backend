@@ -49,6 +49,7 @@ const playerDataService = {
   },
 
   async updateAllPlayerData(userId, data){
+    console.log(data["inventory"])
     await query('BEGIN'); // Mulai transaction
   
     try {
