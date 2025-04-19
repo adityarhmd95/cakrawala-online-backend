@@ -12,14 +12,12 @@ const authController = {
   async register(req, res) {
     try {
       const { username, password, email } = req.body;
-      const clientId = req.headers['client_id'] || null;
 
       // Validasi input
       if (!username || !password || !email) {
         return res.status(400).json({
           status: 'error',
-          message: 'Username, password, and email are required',
-          client_id: clientId
+          message: 'Username, password, and email are required'
         });
       }
 
@@ -28,8 +26,7 @@ const authController = {
       if (existingUser) {
         return res.status(409).json({
           status: 'error',
-          message: 'Username or email already exists',
-          client_id: clientId
+          message: 'Username or email already exists'
         });
       }
 
@@ -76,31 +73,27 @@ const authController = {
             created_at: newUser.created_at
           },
           token
-        },
-        client_id: clientId
+        }
       });
 
     } catch (error) {
       console.error('Registration error:', error);
       res.status(500).json({
         status: 'error',
-        message: 'Internal server error',
-        client_id: req.headers['client_id'] || null
+        message: 'Internal server error'
       });
     }
   },
 
   async login(req, res) {
     try {
-      const { username, password } = req.body;
-      const clientId = req.headers['client_id'] || null;
+      const { username, password } = req.body
 
       // Validasi input
       if (!username || !password) {
         return res.status(400).json({
           status: 'error',
-          message: 'Username and password are required',
-          client_id: clientId
+          message: 'Username and password are required'
         });
       }
 
@@ -110,8 +103,7 @@ const authController = {
       if (!user) {
         return res.status(401).json({
           status: 'error',
-          message: 'Invalid username or password',
-          client_id: clientId
+          message: 'Invalid username or password'
         });
       }
 
@@ -123,8 +115,7 @@ const authController = {
         
         return res.status(403).json({
           status: 'error',
-          message,
-          client_id: clientId
+          message
         });
       }
 
@@ -150,16 +141,14 @@ const authController = {
             created_at: user.created_at
           },
           token
-        },
-        client_id: clientId
+        }
       });
 
     } catch (error) {
       console.error('Login error:', error);
       res.status(500).json({
         status: 'error',
-        message: 'Internal server error',
-        client_id: req.headers['client_id'] || null
+        message: 'Internal server error'
       });
     }
   }
